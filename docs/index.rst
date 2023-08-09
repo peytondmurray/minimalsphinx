@@ -6,6 +6,11 @@
 Welcome to Pokédex's documentation!
 ===================================
 
+.. toctree::
+   :maxdepth: 2
+
+    quickstart
+
 
 Indices and tables
 ==================
