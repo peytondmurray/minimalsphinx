@@ -33,6 +33,11 @@ extensions = [ 'sphinx.ext.autodoc',
                'sphinx_design',
               ]
 
+autodoc_mock_imports = [
+    "packaging",
+    "torch"
+]
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
