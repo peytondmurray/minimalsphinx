@@ -27,11 +27,12 @@ author = 'melissawm'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = [ 'sphinx.ext.autodoc',
-               'sphinx.ext.doctest',
-               'sphinx.ext.intersphinx',
-               'sphinx_design',
-              ]
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.doctest',
+    'sphinx.ext.intersphinx',
+    'sphinx_design',
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -47,7 +48,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'furo'
+html_theme = 'pydata_sphinx_theme'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -56,3 +57,20 @@ html_theme = 'furo'
 
 # Set up intersphinx maps
 intersphinx_mapping = {'numpy': ('https://numpy.org/doc/stable', None)}
+
+html_static_path = ['_static']
+
+
+def add_extra_css(app, pagename, templatename, context, doctree):
+
+    if pagename == 'quickstart':
+        app.add_css_file('extra-css.css')
+
+def setup(app):
+
+    # Adding the css file directly to every page works
+    app.add_css_file('extra-css.css')
+
+
+    # Adding it to a specific page does not
+    # app.connect('html-page-context', add_extra_css)
