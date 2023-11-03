@@ -27,11 +27,13 @@ author = 'melissawm'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = [ 'sphinx.ext.autodoc',
-               'sphinx.ext.doctest',
-               'sphinx.ext.intersphinx',
-               'sphinx_design',
-              ]
+extensions = [
+    "sphinx.ext.autodoc",
+    "sphinx.ext.doctest",
+    "sphinx_tabs.tabs",
+    "sphinx_design",
+    "sphinx.ext.intersphinx",
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -47,12 +49,22 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'furo'
+html_theme = 'pydata_sphinx_theme'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-#html_static_path = ['_static']
+html_static_path = ['_static']
+
+def add_custom_css(app, pagename, templatename, context, doctree):
+    if pagename == "apidocs":
+
+        # If `sphinx-tabs` is enabled, this CSS file never shows up in `apidocs.html`.
+        app.add_css_file("css/apidocs.css")
+
+
+def setup(app):
+    app.connect("html-page-context", add_custom_css)
 
 # Set up intersphinx maps
 intersphinx_mapping = {'numpy': ('https://numpy.org/doc/stable', None)}
